@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>ADIVINHE A JOGADORA</title>
+    <link rel="stylesheet" href="embelezando.css">
+    <script src="dados.js" defer></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <h1>ADIVINHE A JOGADORA</h1>
+
+    <div class="retangulo">
+        <!-- Exibe o nome da jogadora aleatória -->
+        <p id="playerName"></p>
+
+        <form onsubmit="return false;">
+            <input type="text" id="nome" class="caixa-texto" placeholder="Digite o nome da jogadora">
+            <ul id="nameList" style="border: 1px solid #ccc; padding: 5px; max-height: 150px; overflow-y: auto; position: absolute; background: white; list-style: none; display: none;"></ul>
+        </form>
+    </div>
+
+    <div id="playerInfo"></div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>País</th>
+                <th>País onde joga</th>
+                <th>Clube</th>
+                <th>Idade</th>
+                <th>Altura</th>
+                <th>Posição</th>
+            </tr>
+        </thead>
+        <tbody id="dados-container"></tbody>
+    </table>
+
+</body>
+</html>
