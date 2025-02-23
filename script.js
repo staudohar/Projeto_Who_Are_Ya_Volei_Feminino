@@ -1,5 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
-    let playerNames = playerDataArray.map(player => player.nome); // Extrai os nomes das jogadoras
+    let playerNames = playerDataArray.map(player => player.nome); 
+    
+    let attempts = 1; // Contador de tentativas
+    const attemptsDisplay = document.getElementById("attempts-display"); // Elemento para exibir as tentativas
+
+    function updateAttemptsDisplay() {
+        attemptsDisplay.textContent = `Tentativa ${attempts} de 8`;
+    }
 
     // Função para selecionar uma jogadora aleatória
     function getRandomPlayer() {
@@ -17,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let randomPlayerPosition = "";
     let randomPlayerHeight = "";
     if (randomPlayer) {
-        document.getElementById("playerName").textContent = ` ${randomPlayer}`;
+        
         const randomPlayerInfo = playerDataArray.find(player => player.nome === randomPlayer);
         randomPlayerCountry = randomPlayerInfo ? randomPlayerInfo.pais : "";
         randomPlayerCountryTeam = randomPlayerInfo ? randomPlayerInfo.ondeJoga : "";
@@ -35,12 +42,23 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    // Função para verificar se o número máximo de tentativas foi atingido
+    function checkAttempts() {
+        attempts++;
+        updateAttemptsDisplay(); // Atualiza a exibição das tentativas
+        if (attempts > 8 ) {
+            alert("Você perdeu! O número máximo de tentativas foi alcançado. A jogadora era: " + randomPlayer);
+
+            location.reload(); // Recarrega a página após 8 tentativas
+        }
+    }
+
     // Função para filtrar nomes conforme a entrada do usuário
     function filterNames() {
         const input = document.getElementById("nome").value.toLowerCase();
         const nameList = document.getElementById("nameList");
 
-        nameList.innerHTML = ""; // Limpa a lista antes de adicionar novos itens      
+        nameList.innerHTML = ""; // Limpa a lista antes de adicionar novos itens
 
         const filteredNames = playerNames.filter(nome => nome.toLowerCase().includes(input));
 
@@ -94,6 +112,9 @@ document.addEventListener("DOMContentLoaded", function () {
         comparePositions(playerInfo.posicao);
         compareAges(playerInfo.idade);
         compareHeights(playerInfo.altura); // Chama a função para comparar alturas
+
+        // Verifica as tentativas
+        checkAttempts();
     }
 
     // Função para comparar o país da jogadora aleatória com o da jogadora selecionada
@@ -133,8 +154,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-
-
     // Função para comparar as alturas
     function compareHeights(selectedHeight) {
         const heightCell = document.getElementById("heightCell"); // A célula de altura na tabela
@@ -145,8 +164,6 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             heightCell.style.backgroundColor = "green"; // Pinta a célula de verde se as alturas forem iguais
         }
-        
-
     }
 
     function compareAges(selectedAge) {
@@ -158,10 +175,15 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             ageCell.style.backgroundColor = "green"; // Pinta a célula de verde se as alturas forem iguais
         }
-        
-
     }
+
+    
 
     // Adiciona o evento de input para filtrar os nomes
     document.getElementById("nome").addEventListener("input", filterNames);
+
 });
+
+//colocar fotos
+//trocar pra bolinhas?
+

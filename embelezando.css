@@ -81,3 +81,12 @@ th {
     color: white;
 }
 
+.player-img {
+    width: 100%;
+    height: auto;
+    filter: blur(10px); /* Aplica o blur */
+    transition: filter 0.3s ease; /* Transição suave quando o blur desaparecer */
+}
+
+
+
